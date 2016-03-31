@@ -1,0 +1,36 @@
+root@ip-172-31-29-246:/dev/david/kt/limaconf/wks/dockercompose# docker-compose build
+app uses an image, skipping
+consul uses an image, skipping
+Building lb
+Step 1 : FROM nginx:1.7
+ ---> d5acedd7e96a
+Step 2 : MAINTAINER Shane Sveller <shane@bellycard.com>
+ ---> Using cache
+ ---> ff0c0f213139
+Step 3 : RUN DEBIAN_FRONTEND=noninteractive     apt-get update -qq &&     apt-get -y install curl runit &&     rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 8ac7dc1f17d8
+Step 4 : ENV CT_URL https://github.com/hashicorp/consul-template/releases/download/v0.1.0/consul-template_0.1.0_linux_amd64.tar.gz
+ ---> Using cache
+ ---> 11b52f5aecaa
+Step 5 : RUN curl -L $CT_URL | tar -C /usr/local/bin --strip-components 1 -zxf -
+ ---> Using cache
+ ---> bd8e56a76a74
+Step 6 : ADD nginx.service /etc/service/nginx/run
+ ---> Using cache
+ ---> 0137c2ca65f1
+Step 7 : ADD consul-template.service /etc/service/consul-template/run
+ ---> Using cache
+ ---> d3b8fc33d7be
+Step 8 : RUN rm -v /etc/nginx/conf.d/*
+ ---> Using cache
+ ---> ab7658fa4423
+Step 9 : ADD nginx.conf /etc/consul-templates/nginx.conf
+ ---> Using cache
+ ---> abfad9cbe43a
+Step 10 : CMD /usr/bin/runsvdir /etc/service
+ ---> Using cache
+ ---> 7f50b0413a44
+Successfully built 7f50b0413a44
+registrator uses an image, skipping
+root@ip-172-31-29-246:/dev/david/kt/limaconf/wks/dockercompose#
